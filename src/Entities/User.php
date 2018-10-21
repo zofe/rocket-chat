@@ -59,6 +59,15 @@ class User extends Entity
         }
         return $this;
     }
+
+    public function loginByToken($token, $id, $storeInSession = false)
+    {
+        $this->add_request_headers([
+            'X-Auth-Token' => $token,
+            'X-User-Id' => $id,
+        ], $storeInSession);
+        return $this;
+    }
     
     public function logout()
     {
