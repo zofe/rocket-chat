@@ -44,9 +44,10 @@ php artisan vendor:publish --tag=config
 
         $chatUser = new ChatUser($user->name, $password, $user->name, $user->email);
         $chatUser->store();
-        
-        $user->chat_id = $chatUser->id;
-        $user->chat_token = $chatUser->authToken;
+        $chatUser->login();
+
+        $user->chat_id = $chatUser->id();
+        $user->chat_token = $chatUser->authToken();
         $user->save();
         
         return $user;
