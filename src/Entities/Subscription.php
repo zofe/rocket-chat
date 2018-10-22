@@ -2,7 +2,6 @@
 
 namespace Noisim\RocketChat\Entities;
 
-use Noisim\RocketChat\Exceptions\ImActionException;
 use Noisim\RocketChat\Exceptions\SubscriptionActionException;
 
 class Subscription extends Entity
