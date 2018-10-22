@@ -62,6 +62,8 @@ class User extends Entity
 
     public function loginByToken($token, $id, $storeInSession = false)
     {
+        $this->id = $id;
+        $this->authToken = $token;
         $this->add_request_headers([
             'X-Auth-Token' => $token,
             'X-User-Id' => $id,

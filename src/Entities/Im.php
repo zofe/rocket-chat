@@ -14,6 +14,28 @@ class Im extends Entity
         $this->id = $id;
     }
 
+    public function loginByToken($token, $id, $storeInSession = false)
+    {
+        $this->id = $id;
+        $this->authToken = $token;
+        $this->add_request_headers([
+            'X-Auth-Token' => $token,
+            'X-User-Id' => $id,
+        ], $storeInSession);
+        return $this;
+    }
+
+    public function create($username)
+    {
+        $response = $this->request()->post($this->api_url("im.create"))
+            ->body(['username' => $username])
+            ->send();
+
+        $room = $this->handle_response($response, new ImActionException(), ['room']);
+        $this->id = $room->_id;
+        return $this;
+    }
+
     /* Removes the direct message from the user’s list of direct messages. */
 
     public function close($id = null)
