@@ -224,7 +224,7 @@ class User extends Entity
         if (!$id) {
             throw new UserActionException("User ID not specified.");
         }
-
+        //dd($this->api_url("users.getAvatar", [$paramType => $id]));
         $response = $this->request()->get($this->api_url("users.getAvatar", [$paramType => $id]))
             ->send();
         return $this->handle_response($response, new UserActionException());
@@ -301,7 +301,7 @@ class User extends Entity
             throw new UserActionException("User ID not specified.");
         }
 
-        $response = $this->request()->post($this->api_url("users.resetAvatar"))
+        $response = $this->request()->post($this->api_url("users.setAvatar"))
             ->body(["avatarUrl" => $avatarUrl, $paramType => $id])
             ->send();
 

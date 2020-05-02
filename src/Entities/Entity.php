@@ -75,7 +75,7 @@ class Entity
     {
         $fields = is_string($fields) ? [$fields] : $fields;
         try {
-            if ($response->code == 200) {
+            if ($response->code == 200 || $response->code == 307) {
 
                 if (isset($response->body->success) && $response->body->success == true) {
                     return $this->data($response->body, $fields);
@@ -85,6 +85,8 @@ class Entity
                     $exception->setMessage($response->body->message);
                 } else if (isset($response->body->success) && $response->body->success == false) {
                     $exception->setMessage($response->body->error);
+                } else if (isset($response->body) && $response->code == 307) {
+                    return $response->body;
                 } else {
                     $exception->setMessage("Something went wrong.");
                 }
