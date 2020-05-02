@@ -1,3 +1,5 @@
+Fork of https://github.com/albanafmeti/rocket-chat
+
 Rocket-chat is a rest client package for Laravel that you can use to consume Rocket.Chat REST API.
 
 ## Install
